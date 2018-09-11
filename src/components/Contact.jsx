@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 class Contact extends React.Component {
     state = {
-        displayContact: true
+        displayContactInfo: true
     };
 
-    toggleContactDisplay = (name, event) => {
-        console.log(name); // returns the name right here
-        this.setState({ displayContact: false });
+    toggleContactDisplay = () => {
+        const { displayContactInfo } = this.state;
+        this.setState({ displayContactInfo: !displayContactInfo });
     };
 
     render() {
         const { name, email, phone } = this.props;
-        const { displayContact } = this.state;
+        const { displayContactInfo } = this.state;
 
         return (
             <div className="card card-body mb-3">
@@ -21,15 +21,15 @@ class Contact extends React.Component {
                     {name}
                     <i
                         className="fas fa-sort-down"
-                        onClick={this.toggleContactDisplay.bind(this, name)}
+                        onClick={this.toggleContactDisplay}
                     />
                 </h4>
-                {displayContact ? (
+                {displayContactInfo && (
                     <ul className="list-group">
                         <li className="list-group-item">Email: {email}</li>
                         <li className="list-group-item">Phone: {phone}</li>
                     </ul>
-                ) : null}
+                )}
             </div>
         );
     }
