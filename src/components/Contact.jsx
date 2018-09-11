@@ -11,6 +11,11 @@ class Contact extends React.Component {
         this.setState({ displayContactInfo: !displayContactInfo });
     };
 
+    onDeleteContact = () => {
+        const { onDeleteHandler } = this.props;
+        onDeleteHandler();
+    };
+
     render() {
         const { name, email, phone } = this.props;
         const { displayContactInfo } = this.state;
@@ -22,6 +27,17 @@ class Contact extends React.Component {
                     <i
                         className="fas fa-sort-down"
                         onClick={this.toggleContactDisplay}
+                        style={{ cursor: 'pointer' }}
+                    />
+
+                    <i
+                        className="fas fa-trash"
+                        style={{
+                            cursor: 'pointer',
+                            float: 'right',
+                            color: '#dc3545'
+                        }}
+                        onClick={this.onDeleteContact}
                     />
                 </h4>
                 {displayContactInfo && (
@@ -38,7 +54,8 @@ class Contact extends React.Component {
 Contact.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired
+    phone: PropTypes.string.isRequired,
+    onDeleteHandler: PropTypes.func.isRequired
 };
 
 export default Contact;
