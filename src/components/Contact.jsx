@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Consumer } from '../Context';
 
 class Contact extends React.Component {
     state = {
@@ -11,42 +12,56 @@ class Contact extends React.Component {
         this.setState({ displayContactInfo: !displayContactInfo });
     };
 
-    onDeleteContact = () => {
-        const { onDeleteHandler } = this.props;
-        onDeleteHandler();
+    onDeleteContact = (id, dispatch) => {
+        dispatch({ type: 'DELETE_CONTACT', payload: id });
     };
 
     render() {
-        const { name, email, phone } = this.props;
+        const { name, email, phone, id } = this.props;
         const { displayContactInfo } = this.state;
 
         return (
-            <div className="card card-body mb-3">
-                <h4>
-                    {name}
-                    <i
-                        className="fas fa-sort-down"
-                        onClick={this.toggleContactDisplay}
-                        style={{ cursor: 'pointer' }}
-                    />
+            <Consumer>
+                {value => {
+                    const { dispatch } = value;
+                    return (
+                        <div className="card card-body mb-3">
+                            <h4>
+                                {name}
+                                <i
+                                    className="fas fa-sort-down"
+                                    onClick={this.toggleContactDisplay}
+                                    style={{ cursor: 'pointer' }}
+                                />
 
-                    <i
-                        className="fas fa-trash"
-                        style={{
-                            cursor: 'pointer',
-                            float: 'right',
-                            color: '#dc3545'
-                        }}
-                        onClick={this.onDeleteContact}
-                    />
-                </h4>
-                {displayContactInfo && (
-                    <ul className="list-group">
-                        <li className="list-group-item">Email: {email}</li>
-                        <li className="list-group-item">Phone: {phone}</li>
-                    </ul>
-                )}
-            </div>
+                                <i
+                                    className="fas fa-trash"
+                                    style={{
+                                        cursor: 'pointer',
+                                        float: 'right',
+                                        color: '#dc3545'
+                                    }}
+                                    onClick={this.onDeleteContact.bind(
+                                        this,
+                                        id,
+                                        dispatch
+                                    )}
+                                />
+                            </h4>
+                            {displayContactInfo && (
+                                <ul className="list-group">
+                                    <li className="list-group-item">
+                                        Email: {email}
+                                    </li>
+                                    <li className="list-group-item">
+                                        Phone: {phone}
+                                    </li>
+                                </ul>
+                            )}
+                        </div>
+                    );
+                }}
+            </Consumer>
         );
     }
 }
@@ -55,7 +70,7 @@ Contact.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    onDeleteHandler: PropTypes.func.isRequired
+    id: PropTypes.number.isRequired
 };
 
 export default Contact;
