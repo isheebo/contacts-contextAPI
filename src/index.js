@@ -7,16 +7,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => (
     <div>
         <Header branding="Contacts Manager" />
-        <Contact
-            name="Jane Doe"
-            email="janedoe@yahoo.com"
-            phone="333-333-3333"
-        />
-        <Contact
-            name="Jimmy Taylor"
-            email="jimley@gmail.com"
-            phone="113-300-8833"
-        />
+        <div className="container">
+            <Contact
+                name="Jane Doe"
+                email="janedoe@yahoo.com"
+                phone="333-333-3333"
+            />
+            <Contact
+                name="Jimmy Taylor"
+                email="jimley@gmail.com"
+                phone="113-300-8833"
+            />
+        </div>
     </div>
 );
 
