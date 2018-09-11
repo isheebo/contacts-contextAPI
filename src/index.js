@@ -4,6 +4,7 @@ import Contacts from './containers/Contacts';
 import Header from './components/Header';
 import { Provider } from './Context';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/styles.css';
 
 const App = () => (
     <Provider>
