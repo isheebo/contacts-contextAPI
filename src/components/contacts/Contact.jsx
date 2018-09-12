@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Consumer } from '../Context';
+import { Consumer } from '../../Context';
 
 class Contact extends React.Component {
     state = {
