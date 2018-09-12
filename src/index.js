@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Contacts from './containers/Contacts';
 import Header from './components/Header';
+import AddContact from './components/AddContact';
 import { Provider } from './Context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/styles.css';
@@ -11,6 +12,7 @@ const App = () => (
         <div>
             <Header branding="Contacts Manager" />
             <div className="container">
+                <AddContact />
                 <Contacts />
             </div>
         </div>
