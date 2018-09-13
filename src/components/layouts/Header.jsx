@@ -14,6 +14,11 @@ const Header = ({ branding }) => (
                             Home
                         </a>
                     </li>
+                    <li>
+                        <a href="/about" className="nav-link">
+                            About
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
