@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import { Consumer } from '../../Context';
 import TextInputGroup from '../layouts/TextInputGroup';
@@ -19,6 +20,7 @@ class AddContact extends React.Component {
         event.preventDefault(); // prevents submitting to a file
 
         const { name, email, phone } = this.state;
+        const { history } = this.props;
 
         if (name === '') {
             this.setState({ errors: { name: 'Name is required' } });
@@ -41,6 +43,8 @@ class AddContact extends React.Component {
         });
 
         this.setState({ name: '', email: '', phone: '', errors: {} });
+
+        history.push('/');
     };
 
     render() {
@@ -98,5 +102,9 @@ class AddContact extends React.Component {
         );
     }
 }
+
+AddContact.propTypes = {
+    history: PropTypes.any.isRequired
+};
 
 export default AddContact;
