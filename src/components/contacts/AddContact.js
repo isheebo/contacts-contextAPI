@@ -104,7 +104,7 @@ class AddContact extends React.Component {
 }
 
 AddContact.propTypes = {
-    history: PropTypes.any.isRequired
+    history: PropTypes.any.isRequired // used any for lack of a better prop type
 };
 
 export default AddContact;

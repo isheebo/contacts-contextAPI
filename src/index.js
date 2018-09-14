@@ -8,6 +8,7 @@ import AddContact from './components/contacts/AddContact';
 import { Provider } from './Context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/styles.css';
+import NotFound from './components/pages/NotFound';
 
 const App = () => (
     <Provider>
@@ -19,6 +20,7 @@ const App = () => (
                         <Route exact path="/" component={Contacts} />
                         <Route exact path="/contacts/add" component={AddContact} />
                         <Route exact path="/about" component={About} />
+                        <Route component={NotFound} />
                     </Switch>
                 </div>
             </div>
