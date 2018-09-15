@@ -1,3 +1,8 @@
 .bg-primary {
   background-color: #198570 !important;
 }
+
+.btn-success {
+  border-color: #198570;
+  background-color: #198570 !important;
+}
