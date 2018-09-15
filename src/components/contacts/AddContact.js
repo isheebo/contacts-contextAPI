@@ -16,7 +16,7 @@ class AddContact extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
     };
 
-    onSubmit = (dispatch, event) => {
+    onSubmit = async (dispatch, event) => {
         event.preventDefault(); // prevents submitting to a file
 
         const { name, email, phone } = this.state;
@@ -37,13 +37,12 @@ class AddContact extends React.Component {
             return;
         }
 
-        axios
-            .post('https://jsonplaceholder.typicode.com/users/', {
-                name,
-                email,
-                phone
-            })
-            .then(resp => dispatch({ type: 'ADD_CONTACT', payload: resp.data }));
+        const response = await axios.post(
+            'https://jsonplaceholder.typicode.com/users/',
+            { name, email, phone }
+        );
+
+        dispatch({ type: 'ADD_CONTACT', payload: response.data });
 
         this.setState({ name: '', email: '', phone: '', errors: {} });
 
