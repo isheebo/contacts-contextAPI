@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Consumer } from '../../Context';
 
 class Contact extends React.Component {
@@ -49,6 +50,17 @@ class Contact extends React.Component {
                                         dispatch
                                     )}
                                 />
+                                <Link to={`/contacts/edit/${id}`}>
+                                    <i
+                                        className="fas fa-pencil-alt"
+                                        style={{
+                                            cursor: 'pointer',
+                                            float: 'right',
+                                            color: '#777',
+                                            marginRight: '1rem'
+                                        }}
+                                    />
+                                </Link>
                             </h4>
                             {displayContactInfo && (
                                 <ul className="list-group">

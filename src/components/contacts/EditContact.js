@@ -4,13 +4,25 @@ import axios from 'axios';
 import { Consumer } from '../../Context';
 import TextInputGroup from '../layouts/TextInputGroup';
 
-class AddContact extends React.Component {
+class EditContact extends React.Component {
     state = {
         name: '',
         email: '',
         phone: '',
         errors: {}
     };
+
+    async componentDidMount() {
+        const { id } = this.props.match.params;
+        const response = await axios.get(
+            `https://jsonplaceholder.typicode.com/users/${id}`
+        );
+        this.setState({
+            name: response.data.name,
+            phone: response.data.phone,
+            email: response.data.email
+        });
+    }
 
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
@@ -37,12 +49,13 @@ class AddContact extends React.Component {
             return;
         }
 
-        const response = await axios.post(
-            'https://jsonplaceholder.typicode.com/users/',
+        const { id } = this.props.match.params;
+
+        const response = await axios.put(
+            `https://jsonplaceholder.typicode.com/users/${id}`,
             { name, email, phone }
         );
-
-        dispatch({ type: 'ADD_CONTACT', payload: response.data });
+        dispatch({ type: 'UPDATE_CONTACT', payload: response.data });
 
         this.setState({ name: '', email: '', phone: '', errors: {} });
 
@@ -59,7 +72,7 @@ class AddContact extends React.Component {
                     return (
                         <div className="card mb-3">
                             <div className="card-header">
-                                <h1>Add contact</h1>
+                                <h1>Edit contact</h1>
                             </div>
                             <div className="card-body">
                                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
@@ -92,7 +105,7 @@ class AddContact extends React.Component {
 
                                     <input
                                         type="submit"
-                                        value="Add Contact"
+                                        value="Update Contact"
                                         className="btn btn-block btn-success"
                                     />
                                 </form>
@@ -105,8 +118,9 @@ class AddContact extends React.Component {
     }
 }
 
-AddContact.propTypes = {
-    history: PropTypes.any.isRequired // used any for lack of a better prop type
+EditContact.propTypes = {
+    history: PropTypes.any.isRequired,
+    match: PropTypes.object.isRequired
 };
 
-export default AddContact;
+export default EditContact;
